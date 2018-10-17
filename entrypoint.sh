@@ -75,6 +75,7 @@ export CADDYFILE_NUM=${CADDYFILE_NUM:-"001"}
 export FORWARDPROXY=${FORWARDPROXY:-""} 
 export BASICAUTH=${BASICAUTH:-"h2user h2secret"}
 export DIAL_TIMEOUT=${DIAL_TIMEOUT:-"600"}
+export PROBE_RESISTANCE=${PROBE_RESISTANCE:-""}
 
 if [ ! -z "$PROXY" ]; then
     export OUTBOUND_NUM="081"
@@ -86,6 +87,10 @@ fi
 
 if [ ! -z "$FORWARDPROXY" ]; then
     export CADDYFILE_NUM="002"    
+fi
+
+if [ ! -z "$PROBE_RESISTANCE" ]; then
+    export PROBE_RESISTANCE=$(echo "probe_resistance ${PROBE_RESISTANCE}")
 fi
 
 # ProjectV render
@@ -164,4 +169,4 @@ envsubst < /usr/local/share/caddycfg/${CADDYFILE_NUM}_Caddyfile.tmpl > ${CADDYPA
 echo "$CONFIG" | envsubst > ${V2RAY_LOCATION_CONFIG}config.json
 
 nohup caddy -conf ${CADDYPATH}Caddyfile -log ${CADDY_LOG} -http-port ${HTTP_PORT} -https-port ${HTTPS_PORT} -agree=true -root=${CADDYPATH}html &
-v2ray -config ${V2RAY_LOCATION_CONFIG}config.json >> /dev/null 2>&1
+v2ray -config ${V2RAY_LOCATION_CONFIG}config.json
