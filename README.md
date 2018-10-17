@@ -25,8 +25,10 @@ Create CERT & KEY Environment
 
     cat fullchain.cer | sed ':a;N;$!ba;s#\n#\\n#g'
     cat www.example.com.key | sed ':a;N;$!ba;s#\n#\\n#g'
-Example:
-docker run --restart always -v /root/:/tmp/ -p 23119:8080 -p 23118:8443 -e FAILOVER="www.redhat.com" -e UUID=f1efa2a9-8c09-485a-8dda-xxxxxxx -e ALTERID=32 -e WSPATH="/api/" -d letssudormrf/v2ray-docker
 
-docker run --restart always -v /root/:/tmp/ -p 80:8080 -p 23118:8443 -e TLS=huya1121@gmail.com -e DOMAIN=xxx.xxx.com -e FORWARDPROXY=ON -e BASICAUTH="user password"  -e FAILOVER="www.redhat.com" -d letssudormrf/v2ray-docker
+Example:
+
+    docker run --restart always -v /root/:/tmp/ -p 23119:8080 -p 23118:8443 -e FAILOVER="www.redhat.com" -e UUID=f1efa2a9-8c09-485a-8dda-xxxxxxx -e ALTERID=32 -e WSPATH="/api/" -d letssudormrf/v2ray-docker
+
+    docker run --restart always -v /root/:/tmp/ -p 80:8080 -p 23118:8443 -e TLS=huya1121@gmail.com -e DOMAIN=xxx.xxx.com -e FORWARDPROXY=ON -e BASICAUTH="user password"  -e FAILOVER="www.redhat.com" -d letssudormrf/v2ray-docker
 
